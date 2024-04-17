@@ -24,4 +24,11 @@ class Bin{
         int used = items.stream().mapToInt(Integer::intValue).sum();
         return this.c - used;
     }
+
+    int getUsed(){
+        return items.stream().mapToInt(Integer::intValue).sum();
+    }
+    int getNumOfItem(){
+        return items.size();
+    }
 }
