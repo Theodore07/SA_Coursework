@@ -20,7 +20,6 @@ public class SA_H {
 
     private List<Bin> generateRandomSolution(Problem pro){
         List<Bin> bins = new ArrayList<>();
-        Random random = new Random();
 
         List<Integer> itemWeight = pro.getWeights();
         List<Integer> itemCount = pro.getCount();
@@ -47,8 +46,23 @@ public class SA_H {
         return bins;
     }
 
-    private List<Bin> generateNewSolution(Problem p){
+    private List<Bin> generateNewSolution(List<Bin> current_solution, Problem p, Random r){
         
+        List<Bin> candidateSol = new ArrayList<>();
+        
+        // make a new copy of current solution
+        for(Bin bin : current_solution){
+            Bin new_bin = new Bin(p.getCapacity());
+            for(Item item : bin.getItem()){
+                new_bin.addItem(item.getSize());
+            }
+        }
+
+        Item items = 
+        int item_id = r.nextInt(0);
+
+
+        return candidateSol;
     }
 
     public applySA(Problem pro, double temp, double coolingR){
@@ -59,7 +73,8 @@ public class SA_H {
         double cr = coolingR;
 
         while(temp > 1.0){
-
+            List<Bin> candidateSol = generateNewSolution(init, pro, r);
+            // calculate cost of current and candidate solution
         }
         
     }
