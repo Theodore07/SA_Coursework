@@ -8,7 +8,13 @@ public class runner {
         preset_manager manager = new preset_manager();
         Problem[] problemList =  manager.addPreset();
 
-        System.out.println(problemList[0].getNumberOfItem());
+        for(Problem pro : problemList){
+            manager.addProblem(pro);
+        }
+
+        Problem used = manager.getProblemByName("TEST0049");
+
+        System.out.println(used.getWeights());
         
         
     }
