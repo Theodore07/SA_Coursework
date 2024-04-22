@@ -18,7 +18,7 @@ public class runner {
 
         // System.out.println(used.getWeights());
         
-        SA_H solver = new SA_H(used, 100, 0.09);
+        SA_H solver = new SA_H(used, 100, 0.005);
         List<Bin> solution = solver.applySA();
         int n = solution.size();
         System.out.println("================== This is the solution ===================");

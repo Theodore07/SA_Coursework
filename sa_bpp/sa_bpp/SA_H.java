@@ -60,7 +60,7 @@ public class SA_H {
         // }
 
         // get a new random bin index and the bin
-        
+
         Integer randBinId = 0;
         if(candidateSol.size() > 0){
             randBinId = r.nextInt(candidateSol.size());
@@ -111,7 +111,7 @@ public class SA_H {
                 init = candidateSol;
             }
 
-            t *= cr; // Cool down the temperature
+            t = t - t*cr; // Cool down the temperature
         }
 
             return init;
