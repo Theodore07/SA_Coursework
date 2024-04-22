@@ -1,5 +1,6 @@
 package sa_bpp;
 
+import java.util.List;
 
 public class runner {
     
@@ -12,10 +13,14 @@ public class runner {
             manager.addProblem(pro);
         }
 
+        // just input the name of the problem
         Problem used = manager.getProblemByName("TEST0049");
 
-        System.out.println(used.getWeights());
+        // System.out.println(used.getWeights());
         
+        SA_H solver = new SA_H(used, 100, 0.09);
+        List<Bin> solution = solver.applySA();
         
+        System.out.println(solution);
     }
 }

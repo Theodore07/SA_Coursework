@@ -33,7 +33,15 @@ class Bin{
         return items.size();
     }
 
+    int getCapacity(){
+        return c;
+    }
+
     List<Item> getItem(){
         return items; 
+    }
+
+    public void removeItem(int index){
+        items.remove(index);
     }
 }
