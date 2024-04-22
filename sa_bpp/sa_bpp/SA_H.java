@@ -19,18 +19,15 @@ public class SA_H {
     private List<Bin> generateRandomSolution(){
         List<Bin> bins = new ArrayList<>();
 
-        List<Integer> itemWeight = prob.getWeights();
-        List<Integer> itemCount = prob.getCount();
-        int capacity = prob.getCapacity();
+        List<Item> items = prob.getItems();
+        Integer capacity = prob.getCapacity();
 
-        for(int i=0; i < itemWeight.size(); i++){
-            Integer item = itemWeight.get(i);
-            Integer item_counts = itemCount.get(i);
-            for(int j = 0; j < item_counts; j++){
-                boolean packed = false;
+        for(int i=0; i < items.size(); i++){
+            Integer item = items.get(i).getSize();
+            boolean packed = false;
                 for(Bin b : bins){
                    if(b.addItem(item)){
-                    System.out.println("item added!");
+                        System.out.println("item added!");
                         packed = true;
                         break;
                    }   
@@ -39,25 +36,31 @@ public class SA_H {
                     bin.addItem(item);
                     bins.add(bin);
                 }
-            }
+            
         }
-
+        for(Bin b : bins){
+           b.printItems();
+        }
         return bins;
     }
 
     private List<Bin> generateNewSolution(List<Bin> current_solution, Problem p, Random r){
         
-        List<Bin> candidateSol = new ArrayList<>();
-        
+       
         // make a new copy of current solution
-        for(Bin bin : current_solution){
-            Bin new_bin = new Bin(p.getCapacity());
-            for(Item item : bin.getItem()){
-                new_bin.addItem(item.getSize());
-            }
-        }
+        List<Bin> candidateSol = new ArrayList<>();
+        candidateSol.addAll(current_solution);
+
+        // for(Bin bin : current_solution){
+        //     Bin new_bin = new Bin(p.getCapacity());
+            
+        //     for(Item item : bin.getItem()){
+        //         new_bin.addItem(item.getSize());
+        //     }
+        // }
 
         // get a new random bin index and the bin
+        
         Integer randBinId = 0;
         if(candidateSol.size() > 0){
             randBinId = r.nextInt(candidateSol.size());

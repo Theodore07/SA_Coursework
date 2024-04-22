@@ -20,7 +20,12 @@ public class runner {
         
         SA_H solver = new SA_H(used, 100, 0.09);
         List<Bin> solution = solver.applySA();
-        
-        System.out.println(solution);
+        int n = solution.size();
+        System.out.println("================== This is the solution ===================");
+        System.out.println("Number of bins used:");
+        System.out.println(n);
+        for(Bin b : solution){
+            b.printItems();
+        }
     }
 }

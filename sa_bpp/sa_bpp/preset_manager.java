@@ -55,7 +55,7 @@ public class preset_manager {
 
         for(int id = 0; id < presets.length; id++){
             Problem current = presets[id];
-            for(int i = 0; i < current.getNumberOfItem(); i++){
+            for(int i = 0; i < current.getNumberOfUniqueItem(); i++){
                 if(id == 0){
                     current.addPreset(itemWeights_TEST0049[i], itemCounts_TEST0049[i]);
                 }else if(id == 1){

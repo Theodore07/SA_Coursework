@@ -7,27 +7,27 @@ public class Problem {
     private String p_name;
     private int n;
     private int c;
-    private List<Integer> ItemW;
-    private List<Integer> ItemC;
+    private List<Item> Items;
 
     public Problem(String name, int nOfItem, int capacity){
         this.p_name = name;
         this.n = nOfItem;
         this.c = capacity;
-        this.ItemW = new ArrayList<>();
-        this.ItemC = new ArrayList<>();
+        this.Items = new ArrayList<>();
     }
 
     public void addPreset(int weight, int nOfItem){
-        ItemW.add(weight);
-        ItemC.add(nOfItem);
+        for(int i = 0; i < nOfItem; i++){
+            Item item = new Item(weight);
+            Items.add(item);
+        }
     }
 
     public String getProblemName(){
         return p_name;
     }
     
-    public int getNumberOfItem(){
+    public int getNumberOfUniqueItem(){
         return n;
     }
 
@@ -35,12 +35,12 @@ public class Problem {
         return c;
     }
 
-    public List<Integer> getWeights(){
-        return ItemW;
+    public List<Item> getItems(){
+        return Items;
     }
 
-    public List<Integer> getCount(){
-        return ItemC;
+    public Integer getNumOfItems(){
+        return Items.size();
     }
 
 

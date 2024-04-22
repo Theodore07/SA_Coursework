@@ -44,4 +44,12 @@ class Bin{
     public void removeItem(int index){
         items.remove(index);
     }
+    
+    public void printItems(){
+        System.out.println("This is bin is used: " + getUsed());
+        for(Item item : items){
+            System.out.print(item.getSize() + ",");
+        }
+        System.out.println();
+    }
 }
