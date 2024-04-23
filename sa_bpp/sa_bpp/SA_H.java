@@ -27,7 +27,6 @@ public class SA_H {
             boolean packed = false;
                 for(Bin b : bins){
                    if(b.addItem(item)){
-                        System.out.println("item added!");
                         packed = true;
                         break;
                    }   
@@ -38,9 +37,7 @@ public class SA_H {
                 }
             
         }
-        for(Bin b : bins){
-           b.printItems();
-        }
+        
         return bins;
     }
 
@@ -48,34 +45,24 @@ public class SA_H {
         
        
         // make a new copy of current solution
-        List<Bin> candidateSol = new ArrayList<>();
-        candidateSol.addAll(current_solution);
+        List<Bin> candidateSol = new ArrayList<>(current_solution);
 
-        // for(Bin bin : current_solution){
-        //     Bin new_bin = new Bin(p.getCapacity());
-            
-        //     for(Item item : bin.getItem()){
-        //         new_bin.addItem(item.getSize());
-        //     }
-        // }
-
-        // get a new random bin index and the bin
-
+        // select a random bin, and check if the new solutin is empty or not
         Integer randBinId = 0;
-        if(candidateSol.size() > 0){
+        if(candidateSol.size() ==  current_solution.size()){
             randBinId = r.nextInt(candidateSol.size());
         }else{
             System.out.println("the new solution is empty");
             return candidateSol;
         }
-        
         Bin randBin = candidateSol.get(randBinId);
+
         // get the items inside of it
         List<Item> items = randBin.getItem();
-        // select a random index from the specific bin
         Integer randItemId = r.nextInt(items.size());
+
         // get the new random item
-        Item randItem = items.get(randBinId);
+        Item randItem = items.get(randItemId);
 
         for(Bin bin : candidateSol){
             if(bin != randBin && bin.addItem(randItem.getSize())){
@@ -100,18 +87,21 @@ public class SA_H {
 
         double t = this.temperature;
         double cr = this.coolingR;
+        int iterate = 0;
 
-        while(t > 1.0){
+        while(t > 0){
+            System.out.println("Iteration" + " " + iterate + " " + " number of bins: " + init.size());
             List<Bin> candidateSol = generateNewSolution(init, this.prob, r);
             // calculate cost of current and candidate solution
             int currentSolCost = calculateEnergy(init);
             int candidateSolCost = calculateEnergy(candidateSol);
             int delta = candidateSolCost - currentSolCost;
-            if (delta < 0 || Math.exp(-delta / t) > r.nextDouble()) {
+            if (delta < 0 || Math.exp(-delta / t) > r.nextDouble(0,1)) {
                 init = candidateSol;
             }
-
-            t = t - t*cr; // Cool down the temperature
+            
+            iterate += 1;
+            t *= cr; // Cool down the temperature
         }
 
             return init;

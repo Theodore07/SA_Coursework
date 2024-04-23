@@ -15,15 +15,11 @@ public class runner {
 
         // just input the name of the problem
         Problem used = manager.getProblemByName("TEST0049");
-
-        // System.out.println(used.getWeights());
         
         SA_H solver = new SA_H(used, 100, 0.005);
         List<Bin> solution = solver.applySA();
-        int n = solution.size();
         System.out.println("================== This is the solution ===================");
-        System.out.println("Number of bins used:");
-        System.out.println(n);
+        System.out.println("Number of bins used:" + solution.size());
         for(Bin b : solution){
             b.printItems();
         }
