@@ -9,6 +9,7 @@ public class SA_H {
     private double temperature;
     private double coolingR;
     private Problem prob;
+    
 
     public SA_H(Problem problem, double temp, double coolingRate){
         this.prob = problem;
@@ -85,12 +86,13 @@ public class SA_H {
         Random r = new Random();
         List<Bin> init = generateRandomSolution();
 
+        long startT = System.currentTimeMillis();
         double t = this.temperature;
         double cr = this.coolingR;
         int iterate = 0;
 
         while(t > 0){
-            System.out.println("Iteration" + " " + iterate + " " + " number of bins: " + init.size());
+            System.out.println("Iteration" + " " + iterate + " " + " number of bins: " + init.size() + " " + "current temperature:" + t);
             List<Bin> candidateSol = generateNewSolution(init, this.prob, r);
             // calculate cost of current and candidate solution
             int currentSolCost = calculateEnergy(init);
@@ -100,11 +102,16 @@ public class SA_H {
                 init = candidateSol;
             }
             
+            
             iterate += 1;
             t *= cr; // Cool down the temperature
         }
 
-            return init;
+        long endT = System.currentTimeMillis();
+        long runTime = endT - startT;
+        System.out.println("Execution Time: " + runTime);
+        
+        return init;
     }
 
     private int calculateEnergy(List<Bin> solution){
